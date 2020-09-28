@@ -25,8 +25,7 @@ extern keymap_config_t keymap_config;
 #define _SPEC2 4
 
 #define SFT_ESC LSFT_T(KC_ESC) //Shift on press, Escape on tap
-#define LCTRL_SPC LCTL_T(KC_SPC) //Alt on press, Space on tap
-#define SPEC1 LT(_SPEC1, KC_ENT)
+#define LCTRL_SPC LCTL_T(KC_SPC) //Ctrl on press, Space on tap
 
 #define OS_LGUI OSM(MOD_LGUI) //LGUI as one shot key
 #define OS_SPEC1 OSL(_SPEC1) //LGUI as one shot key
