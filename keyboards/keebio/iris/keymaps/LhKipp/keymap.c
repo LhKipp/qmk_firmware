@@ -29,6 +29,8 @@ extern keymap_config_t keymap_config;
 #define LCTRL_SPC LCTL_T(KC_SPC) //Ctrl on press, Space on tap
 
 #define OS_LGUI OSM(MOD_LGUI) //LGUI as one shot key
+#define LGUI_SPEC TD(OS_LGUI_SPEC1)
+
 #define OS_LALT OSM(MOD_LALT) //LGUI as one shot key
 #define OS_SPEC1 OSL(_SPEC1) //LGUI as one shot key
 #define OS_SPEC2 OSL(_SPEC2) //LGUI as one shot key
@@ -81,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_SPEC2,KC_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RALT,          DVORAK,  KC_N,    KC_M,    GER_COM, GER_DOT, KC_MINS ,KC_RALT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LGUI, LCTRL_SPC, KC_F11,                  KC_F12, TD(OS_LGUI_SPEC1), KC_LALT
+                                    KC_LALT, LCTRL_SPC, KC_F11,                  KC_F12, LGUI_SPEC, KC_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
 
   ),
@@ -96,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_SPEC2,KC_MINS, KC_Q,    KC_J,   KC_K,    KC_X,    KC_RALT,           SC,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RALT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LGUI, LCTRL_SPC, KC_F11,                  KC_F12, OS_SPEC1, KC_LALT
+                                    KC_LALT, LCTRL_SPC, KC_F11,                  KC_F12, LGUI_SPEC, KC_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -104,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_GRV,                             KC_PIPE, KC_UP,   KC_RPRN, KC_QUOT, KC_0,    _______,
+     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_GRV,                             KC_PIPE, KC_UP,   KC_RPRN, KC_QUOT, KC_LEFT,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_AMPR, KC_LT,   KC_LCBR, KC_LBRC, KC_LEFT,                            KC_RIGHT,KC_RBRC, KC_RCBR, KC_GT,   KC_EQL,  _______,
+     _______, KC_AMPR, KC_LT,   KC_LCBR, KC_LBRC, KC_BSPC,                            KC_EQL,  KC_RBRC, KC_RCBR, KC_GT,   KC_RIGHT,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_TILD, KC_PLUS, KC_0,    KC_DLR,  KC_BSLS, _______,          _______, KC_CIRC, KC_EXLM, KC_HASH, KC_AT,   KC_PERC, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
