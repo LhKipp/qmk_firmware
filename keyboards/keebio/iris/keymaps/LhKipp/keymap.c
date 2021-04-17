@@ -42,7 +42,7 @@ extern keymap_config_t keymap_config;
 
 // Tap Dance keycodes
 enum td_keycodes {
-    OS_LGUI_SPEC1 // OS LGUI on Tap, Activate SPEC1 layer on hold
+  OS_LGUI_SPEC1 // OS LGUI on Tap, Activate SPEC1 layer on hold
 };
 
 // Define a type containing as many tapdance states as you need
@@ -50,9 +50,7 @@ typedef enum {
     TD_NONE,
     TD_UNKNOWN,
     TD_SINGLE_TAP,
-    TD_SINGLE_HOLD,
-    TD_DOUBLE_TAP,
-    TD_SINGLE_TAP_SINGLE_HOLD,
+    TD_SINGLE_HOLD
 } td_state_t;
 
 // Create a global instance of the tapdance state type
@@ -152,10 +150,6 @@ td_state_t cur_dance(qk_tap_dance_state_t *state) {
         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
         else return TD_SINGLE_HOLD;
     }
-    if (state->count == 2) {
-        if (state->interrupted || !state->pressed) return TD_DOUBLE_TAP;
-        else return TD_SINGLE_TAP_SINGLE_HOLD;
-    }
     else return TD_UNKNOWN; // Any number higher than the maximum state value you return above
 }
 
@@ -170,13 +164,6 @@ void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_HOLD:
             layer_on(_SPEC1);
             break;
-        case TD_DOUBLE_TAP:
-            register_mods(MOD_BIT(KC_LGUI));
-            register_code16(KC_TAB);
-            break;
-        case TD_SINGLE_TAP_SINGLE_HOLD:
-            register_mods(MOD_BIT(KC_LGUI));
-            break;
         case TD_UNKNOWN:
             break;
         case TD_NONE:
@@ -185,20 +172,13 @@ void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 void os_lgui_spec1_reset(qk_tap_dance_state_t *state, void *user_data) {
-    // If the key was held down and now is released then switch off the layer
     switch (td_state) {
         case TD_SINGLE_TAP:
             //Oneshot mod should get removed by tapping something
             break;
         case TD_SINGLE_HOLD:
+            // If the key was held down and now is released then switch off the layer
             layer_off(_SPEC1);
-            break;
-        case TD_DOUBLE_TAP:
-            unregister_code16(KC_TAB);
-            unregister_mods(MOD_BIT(KC_LGUI));
-            break;
-        case TD_SINGLE_TAP_SINGLE_HOLD:
-            unregister_mods(MOD_BIT(KC_LGUI));
             break;
         case TD_UNKNOWN:
             break;
