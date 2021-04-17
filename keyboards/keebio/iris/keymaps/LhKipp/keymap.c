@@ -37,6 +37,32 @@ extern keymap_config_t keymap_config;
 #define QWERT DF(_QWERTY)
 #define DVORAK DF(_DVORAK)
 
+
+// Tap Dance keycodes
+enum td_keycodes {
+    OS_LGUI_SPEC1 // OS LGUI on Tap, Activate SPEC1 layer on hold
+};
+
+// Define a type containing as many tapdance states as you need
+typedef enum {
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_SINGLE_HOLD,
+    TD_DOUBLE_TAP,
+    TD_SINGLE_TAP_SINGLE_HOLD,
+} td_state_t;
+
+// Create a global instance of the tapdance state type
+static td_state_t td_state;
+
+// Function to determine the current tapdance state
+td_state_t cur_dance(qk_tap_dance_state_t *state);
+
+// `finished` and `reset` functions for each tapdance keycode
+void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data);
+void os_lgui_spec1_reset(qk_tap_dance_state_t *state, void *user_data);
+
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
 
@@ -55,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_SPEC2,KC_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RALT,          DVORAK,  KC_N,    KC_M,    GER_COM, GER_DOT, KC_MINS ,KC_RALT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LGUI, LCTRL_SPC, KC_F11,                  KC_F12, OS_SPEC1, KC_LALT
+                                    OS_LGUI, LCTRL_SPC, KC_F11,                  KC_F12, TD(OS_LGUI_SPEC1), KC_LALT
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
 
   ),
@@ -116,6 +142,73 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 
+};
+
+// Determine the tapdance state to return
+td_state_t cur_dance(qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+        else return TD_SINGLE_HOLD;
+    }
+    if (state->count == 2) {
+        if (state->interrupted || !state->pressed) return TD_DOUBLE_TAP;
+        else return TD_SINGLE_TAP_SINGLE_HOLD;
+    }
+    else return TD_UNKNOWN; // Any number higher than the maximum state value you return above
+}
+
+void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data) {
+    uint8_t active_mods;
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            active_mods = get_oneshot_mods();
+            set_oneshot_mods(MOD_BIT(KC_LGUI) | active_mods);
+            break;
+        case TD_SINGLE_HOLD:
+            layer_on(_SPEC1);
+            break;
+        case TD_DOUBLE_TAP:
+            register_mods(MOD_BIT(KC_LGUI));
+            register_code16(KC_TAB);
+            break;
+        case TD_SINGLE_TAP_SINGLE_HOLD:
+            register_mods(MOD_BIT(KC_LGUI));
+            break;
+        case TD_UNKNOWN:
+            break;
+        case TD_NONE:
+            break;
+    }
+}
+
+void os_lgui_spec1_reset(qk_tap_dance_state_t *state, void *user_data) {
+    // If the key was held down and now is released then switch off the layer
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            //Oneshot mod should get removed by tapping something
+            break;
+        case TD_SINGLE_HOLD:
+            layer_off(_SPEC1);
+            break;
+        case TD_DOUBLE_TAP:
+            unregister_code16(KC_TAB);
+            unregister_mods(MOD_BIT(KC_LGUI));
+            break;
+        case TD_SINGLE_TAP_SINGLE_HOLD:
+            unregister_mods(MOD_BIT(KC_LGUI));
+            break;
+        case TD_UNKNOWN:
+            break;
+        case TD_NONE:
+            break;
+    }
+    td_state = TD_NONE;
+}
+
+// Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [OS_LGUI_SPEC1] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, os_lgui_spec1_finished, os_lgui_spec1_reset)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
