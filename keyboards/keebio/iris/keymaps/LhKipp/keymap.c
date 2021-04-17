@@ -29,8 +29,6 @@ extern keymap_config_t keymap_config;
 #define LCTRL_SPC LCTL_T(KC_SPC) //Ctrl on press, Space on tap
 
 #define OS_LGUI OSM(MOD_LGUI) //LGUI as one shot key
-#define LGUI_SPEC TD(OS_LGUI_SPEC1)
-
 #define OS_LALT OSM(MOD_LALT) //LGUI as one shot key
 #define OS_SPEC1 OSL(_SPEC1) //LGUI as one shot key
 #define OS_SPEC2 OSL(_SPEC2) //LGUI as one shot key
@@ -38,30 +36,6 @@ extern keymap_config_t keymap_config;
 #define SC DF(_SC)
 #define QWERT DF(_QWERTY)
 #define DVORAK DF(_DVORAK)
-
-
-// Tap Dance keycodes
-enum td_keycodes {
-  OS_LGUI_SPEC1 // OS LGUI on Tap, Activate SPEC1 layer on hold
-};
-
-// Define a type containing as many tapdance states as you need
-typedef enum {
-    TD_NONE,
-    TD_UNKNOWN,
-    TD_SINGLE_TAP,
-    TD_SINGLE_HOLD
-} td_state_t;
-
-// Create a global instance of the tapdance state type
-static td_state_t td_state;
-
-// Function to determine the current tapdance state
-td_state_t cur_dance(qk_tap_dance_state_t *state);
-
-// `finished` and `reset` functions for each tapdance keycode
-void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data);
-void os_lgui_spec1_reset(qk_tap_dance_state_t *state, void *user_data);
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -81,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_SPEC2,KC_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RALT,          DVORAK,  KC_N,    KC_M,    GER_COM, GER_DOT, KC_MINS ,KC_RALT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LALT, LCTRL_SPC, KC_F11,                  KC_F12, LGUI_SPEC, KC_LGUI
+                                    OS_LALT, LCTRL_SPC, KC_F11,                  KC_F12, OS_SPEC1, OS_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
 
   ),
@@ -96,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_SPEC2,KC_MINS, KC_Q,    KC_J,   KC_K,    KC_X,    KC_RALT,           SC,      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RALT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LALT, LCTRL_SPC, KC_F11,                  KC_F12, LGUI_SPEC, KC_LGUI
+                                    OS_LALT, LCTRL_SPC, KC_F11,                  KC_F12, OS_SPEC1, OS_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -104,9 +78,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_GRV,                             KC_PIPE, KC_UP,   KC_RPRN, KC_QUOT, KC_LEFT,    _______,
+     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_GRV,                             KC_PIPE, KC_UP,   KC_RPRN, KC_QUOT, KC_LEFT, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_AMPR, KC_LT,   KC_LCBR, KC_LBRC, KC_BSPC,                            KC_EQL,  KC_RBRC, KC_RCBR, KC_GT,   KC_RIGHT,  _______,
+     _______, KC_1,    KC_LT,   KC_LCBR, KC_LBRC, KC_AMPR,                            KC_EQL,  KC_RBRC, KC_RCBR, KC_GT,   KC_RIGHT,_______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_TILD, KC_PLUS, KC_0,    KC_DLR,  KC_BSLS, _______,          _______, KC_CIRC, KC_EXLM, KC_HASH, KC_AT,   KC_PERC, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -142,55 +116,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 
-};
-
-// Determine the tapdance state to return
-td_state_t cur_dance(qk_tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
-        else return TD_SINGLE_HOLD;
-    }
-    else return TD_UNKNOWN; // Any number higher than the maximum state value you return above
-}
-
-void os_lgui_spec1_finished(qk_tap_dance_state_t *state, void *user_data) {
-    uint8_t active_mods;
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            active_mods = get_oneshot_mods();
-            set_oneshot_mods(MOD_BIT(KC_LGUI) | active_mods);
-            break;
-        case TD_SINGLE_HOLD:
-            layer_on(_SPEC1);
-            break;
-        case TD_UNKNOWN:
-            break;
-        case TD_NONE:
-            break;
-    }
-}
-
-void os_lgui_spec1_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP:
-            //Oneshot mod should get removed by tapping something
-            break;
-        case TD_SINGLE_HOLD:
-            // If the key was held down and now is released then switch off the layer
-            layer_off(_SPEC1);
-            break;
-        case TD_UNKNOWN:
-            break;
-        case TD_NONE:
-            break;
-    }
-    td_state = TD_NONE;
-}
-
-// Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [OS_LGUI_SPEC1] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, os_lgui_spec1_finished, os_lgui_spec1_reset)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
