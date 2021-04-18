@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_LGUI, KC_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RALT,          DVORAK,  KC_N,    KC_M,    GER_COM, GER_DOT, MIN_QUEST, SFT_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,OS_SPEC1, OS_LGUI
+                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,SPEC1_ENT, OS_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
 
   ),
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_LGUI, KC_MINS, KC_Q,    KC_J,   KC_K,    KC_X,    KC_RALT,           WORKMAN, KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    SFT_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,OS_SPEC1, OS_LGUI
+                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,SPEC1_ENT, OS_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_LGUI, KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,    KC_RALT,          SC,      KC_K,    KC_L,    GER_COM, GER_DOT, MIN_QUEST,SFT_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,OS_SPEC1, OS_LGUI
+                                    OS_LALT, LCTRL_SPC, KC_F11,                  OS_SPEC2,SPEC1_ENT, OS_LGUI
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
