@@ -47,8 +47,8 @@ enum custom_keycodes {
 
   GER_COM, // ,;
   GER_DOT, // .:
-  UN_SLSH, // _/
-  MIN_QUEST // ?-
+  SLSH_UN, // /_
+  MIN_QUEST // -?
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Z,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     SFT_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    UN_SLSH, KC_BSPC,
+     SFT_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    SLSH_UN, KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      OS_LGUI, KC_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RALT,          DVORAK,  KC_N,    KC_M,    GER_COM, GER_DOT, MIN_QUEST, SFT_ENT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_INS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_D,    KC_R,    KC_W,    KC_B,                               KC_J,    KC_F,    KC_U,    KC_P,    UN_SLSH, KC_DEL,
+     KC_TAB,  KC_Q,    KC_D,    KC_R,    KC_W,    KC_B,                               KC_J,    KC_F,    KC_U,    SLSH_UN, KC_P,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      SFT_ESC, KC_A,    KC_S,    KC_H,    KC_T,    KC_G,                               KC_Y,    KC_N,    KC_E,    KC_O,    KC_I,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -99,11 +99,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_GRV,                             KC_PIPE, KC_UP,   KC_RPRN, KC_QUOT, KC_LEFT, _______,
+     _______, KC_ASTR, KC_DQUO, KC_LPRN, KC_DOWN, KC_LEFT,                            KC_RIGHT, KC_UP,  KC_RPRN, KC_QUOT, KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_BSPC, KC_LT,   KC_LCBR, KC_LBRC, KC_AMPR,                            KC_EQL,  KC_RBRC, KC_RCBR, KC_GT,   KC_QUES, _______,
+     _______, KC_PIPE, KC_LT,   KC_LCBR, KC_LBRC, KC_AMPR,                            KC_EQL,  KC_RBRC, KC_RCBR, KC_GT,   KC_GRV,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_TILD, KC_PLUS, KC_0,    KC_DLR,  KC_BSLS, _______,          _______, KC_CIRC, KC_EXLM, KC_HASH, KC_AT,   KC_PERC,    _______,
+     _______, KC_TILD, KC_PLUS, KC_PERC,  KC_DLR,  KC_BSLS, _______,         _______, KC_CIRC, KC_EXLM, KC_HASH, KC_AT,   KC_0,    _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                     _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -159,12 +159,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
-    case UN_SLSH:
+    case SLSH_UN:
             if(record->event.pressed){
                 if(keyboard_report->mods & (MOD_BIT(KC_LSFT))){ //If shift is on
-                        SEND_STRING(SS_UP(X_LSHIFT)SS_TAP(X_SLSH)SS_DOWN(X_LSHIFT));
+                        SEND_STRING(SS_TAP(X_MINS));
                 }else{
-                        SEND_STRING(SS_DOWN(X_LSHIFT)SS_TAP(X_MINS)SS_UP(X_LSHIFT));
+                        SEND_STRING(SS_TAP(X_SLSH));
                 }
             }
             break;
